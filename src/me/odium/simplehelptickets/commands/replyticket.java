@@ -173,6 +173,10 @@ public class replyticket implements CommandExecutor {
                   }         
                 }
               } else {
+                
+                // Check that responder has permission to respond to ticket
+                if (!(player == null || player.hasPermission("sht.moderator")))
+                  return true;
               
               stmt.executeUpdate("UPDATE SHT_Tickets SET adminreply='"+admin+": "+details+"', admin='"+admin+"' WHERE id='"+id+"'");
               sender.sendMessage(plugin.getMessage("AdminRepliedToTicket").replace("&arg", id));
