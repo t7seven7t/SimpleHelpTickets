@@ -159,7 +159,7 @@ public class replyticket implements CommandExecutor {
 
                   Player[] players = Bukkit.getOnlinePlayers();
                   for(Player op: players){
-                    if(op.hasPermission("sht.admin") && op != player ) {
+                    if(op.hasPermission("sht.moderator") && op != player ) {
                       op.sendMessage(plugin.getMessage("UserRepliedToTicket").replace("%player", player.getName()).replace("&arg", id));
                     }
                   }
@@ -172,7 +172,6 @@ public class replyticket implements CommandExecutor {
                     return true;
                   }         
                 }
-                
               } else {
               
               stmt.executeUpdate("UPDATE SHT_Tickets SET adminreply='"+admin+": "+details+"', admin='"+admin+"' WHERE id='"+id+"'");
@@ -241,7 +240,7 @@ public class replyticket implements CommandExecutor {
 //            sb.append(details);
 //            sb.append(" ");
 //          }
-//          String details = sb.toString();                
+//          String details = sb.toString();
 //          if (player == null) {
 //            plugin.getStorageConfig().set(ticketno+".reply", "(Console) " + details);
 //          } else {

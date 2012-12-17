@@ -59,7 +59,7 @@ public class checkticket implements CommandExecutor {
           rs.next(); //sets pointer to first record in result set
         }
 
-        if (player == null || player.hasPermission("sht.admin") || rs.getString("owner").equalsIgnoreCase(player.getName())) {
+        if (player == null || player.hasPermission("sht.moderator") || rs.getString("owner").equalsIgnoreCase(player.getName())) {
           String world = null;
           String date;
           String expiration;
@@ -163,7 +163,7 @@ public class checkticket implements CommandExecutor {
 //    int ticketno = Integer.parseInt( args[0] );
 //    //      java.util.List<String> tickets = plugin.getStorageConfig().getStringList("Tickets");  
 //    String placedby =  plugin.getStorageConfig().getString(ticketno+".placedby");
-//    if (player != null && !placedby.contains(player.getDisplayName()) && !player.hasPermission("sht.admin")) {
+//    if (player != null && !placedby.contains(player.getDisplayName()) && !player.hasPermission("sht.moderator")) {
 //      sender.sendMessage(plugin.GRAY+"[SimpleHelpTickets] "+plugin.RED+"This is not your ticket to check");
 //    } else {
 //      String tickdesc = plugin.getStorageConfig().getString(ticketno+".description");

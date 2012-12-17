@@ -143,7 +143,7 @@ public class taketicket implements CommandExecutor {
       // NOTIFY -OTHER- ADMINS 
       Player[] players = Bukkit.getOnlinePlayers();
       for(Player op: players){
-        if(op.hasPermission("sht.admin") && op != player) {
+        if(op.hasPermission("sht.moderator") && op != player) {
           //          op.sendMessage(plugin.GRAY+"[SimpleHelpTickets] "+ChatColor.GOLD + admin + ChatColor.WHITE + " is reviewing ticket #: "+ChatColor.GOLD+id);
           op.sendMessage(plugin.getMessage("TakeTicketADMIN").replace("&arg", id).replace("&admin", admin));
         }

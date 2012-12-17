@@ -119,7 +119,7 @@ public class ticket implements CommandExecutor {
                 // Notify admin of new ticket
                 Player[] players = Bukkit.getOnlinePlayers();
                 for(Player op: players){
-                  if(op.hasPermission("sht.admin") && op != player) {
+                  if(op.hasPermission("sht.moderator") && op != player) {
                     String pl = "CONSOLE";
                     op.sendMessage(plugin.getMessage("TicketOpenADMIN").replace("%player", pl));
 //                    op.sendMessage(plugin.GRAY+"[SimpleHelpTickets] "+plugin.GOLD+"CONSOLE"+ ChatColor.WHITE + " has opened a " + ChatColor.GOLD + "Help Ticket");
@@ -163,7 +163,7 @@ public class ticket implements CommandExecutor {
                 // Notify admin of new ticket
                 Player[] players = Bukkit.getOnlinePlayers();
                 for(Player op: players){
-                  if(op.hasPermission("sht.admin") && op != player) {
+                  if(op.hasPermission("sht.moderator") && op != player) {
                     String pl = "CONSOLE";
                     op.sendMessage(plugin.getMessage("TicketOpenADMIN").replace("%player", pl));
 //                    op.sendMessage(plugin.GRAY+"[SimpleHelpTickets] "+plugin.GOLD+"CONSOLE"+ ChatColor.WHITE + " has opened a " + ChatColor.GOLD + "Help Ticket");
@@ -225,7 +225,7 @@ public class ticket implements CommandExecutor {
                 // Notify admin of new ticket
                 Player[] players = Bukkit.getOnlinePlayers();
                 for(Player op: players){
-                  if(op.hasPermission("sht.admin") && op != player) {
+                  if(op.hasPermission("sht.moderator") && op != player) {
 //                    op.sendMessage(plugin.GRAY+"[SimpleHelpTickets] "+plugin.GOLD+"CONSOLE"+ ChatColor.WHITE + " has opened a " + ChatColor.GOLD + "Help Ticket");
                     String pl = "CONSOLE";
                     op.sendMessage(plugin.getMessage("TicketOpenADMIN").replace("%player", pl));
@@ -245,7 +245,7 @@ public class ticket implements CommandExecutor {
               final int ticketCount = rs.getInt("MaxTickets");
               int MaxTickets = plugin.getConfig().getInt("MaxTickets");
 
-              if (ticketCount >= MaxTickets && !player.hasPermission("sht.admin")) {
+              if (ticketCount >= MaxTickets && !player.hasPermission("sht.moderator")) {
 //                String TicketOpen = plugin.getConfig().getString("MessageOutput.TicketMaxMsg");
 //                sender.sendMessage(plugin.GRAY+"[SimpleHelpTickets] "+plugin.replaceColorMacros(TicketOpen).replace("%maxtickets%", ""+MaxTickets));
                 sender.sendMessage(plugin.getMessage("TicketMax").replace("&arg", MaxTickets+""));
@@ -280,7 +280,7 @@ public class ticket implements CommandExecutor {
               // Notify admin of new ticket
               Player[] players = Bukkit.getOnlinePlayers();
               for(Player op: players){
-                if(op.hasPermission("sht.admin") && op != player) {
+                if(op.hasPermission("sht.moderator") && op != player) {
                   op.sendMessage(plugin.getMessage("TicketOpenADMIN").replace("%player", sender.getName()));
 //                  op.sendMessage(plugin.GRAY+"[SimpleHelpTickets] "+ ChatColor.WHITE +"Player "+plugin.GOLD+sender.getName() + ChatColor.WHITE + " has opened a Help Ticket");
                 }

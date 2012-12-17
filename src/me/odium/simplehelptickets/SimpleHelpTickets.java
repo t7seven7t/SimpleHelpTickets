@@ -23,7 +23,6 @@ import me.odium.simplehelptickets.commands.sht;
 import me.odium.simplehelptickets.commands.taketicket;
 import me.odium.simplehelptickets.commands.ticket;
 import me.odium.simplehelptickets.commands.tickets;
-import me.odium.simplehelptickets.listeners.PListener;
 import me.odium.simplehelptickets.DBConnection;
 
 import org.bukkit.ChatColor;
@@ -43,6 +42,7 @@ public class SimpleHelpTickets extends JavaPlugin {
 	public ChatColor GRAY = ChatColor.GRAY;
 	public ChatColor WHITE = ChatColor.WHITE; 
 	public ChatColor AQUA = ChatColor.AQUA;
+	public ChatColor BLUE = ChatColor.BLUE;
 
 	DBConnection service = DBConnection.getInstance();
 
@@ -117,8 +117,6 @@ public class SimpleHelpTickets extends JavaPlugin {
 		ccfgOptions.copyDefaults(true);
 		ccfgOptions.copyHeader(true);
 		saveOutputConfig();
-		// declare new listener
-		new PListener(this);
 		// declare executors
 		this.getCommand("sht").setExecutor(new sht(this));
 		this.getCommand("ticket").setExecutor(new ticket(this));
@@ -293,27 +291,30 @@ public class SimpleHelpTickets extends JavaPlugin {
 //	  sender.sendMessage(ChatColor.GREEN + " /closeticket <#>" + ChatColor.WHITE + " - Close one of your tickets");
 	  sender.sendMessage(getMessage("UserCommandsMenu-closeticket"));
 //	  sender.sendMessage(ChatColor.GREEN + " /delticket <#>" + ChatColor.WHITE + " - Delete a ticket");
-    sender.sendMessage(getMessage("UserCommandsMenu-delticket"));
-	  if(sender == null || sender.hasPermission("sht.admin")) {
+      sender.sendMessage(getMessage("UserCommandsMenu-delticket"));
+	  if(sender == null || sender.hasPermission("sht.moderator")) {
+//	    sender.sendMessage(ChatColor.GOLD + "[ " + "Guard Commands" + ChatColor.RESET+ChatColor.GOLD + " ]");
+	    sender.sendMessage(getMessage("GuardCommandsMenu-Title"));
+//	    sender.sendMessage(ChatColor.CYAN + " /tickets [ac]" + ChatColor.WHITE + " - List Open/All/Closed tickets");
+	    sender.sendMessage(getMessage("GuardCommandsMenu-tickets"));
+//	    sender.sendMessage(ChatColor.CYAN+ " /taketicket <#>" + ChatColor.WHITE + " - Assign yourself to a ticket");
+	    sender.sendMessage(getMessage("GuardCommandsMenu-taketicket"));
+//	    sender.sendMessage(ChatColor.CYAN + " /replyticket <#> <Reply>" + ChatColor.WHITE + " - Reply to a ticket");
+	    sender.sendMessage(getMessage("GuardCommandsMenu-replyticket"));
+	  }   
+      if(sender == null || sender.hasPermission("sht.admin")) {
 //	    sender.sendMessage(ChatColor.GOLD + "[ " + "Admin Commands" + ChatColor.RESET+ChatColor.GOLD + " ]");
 	    sender.sendMessage(getMessage("AdminCommandsMenu-Title"));
-//	    sender.sendMessage(ChatColor.DARK_AQUA + " /tickets [ac]" + ChatColor.WHITE + " - List Open/All/Closed tickets");
-	    sender.sendMessage(getMessage("AdminCommandsMenu-tickets"));
-//	    sender.sendMessage(ChatColor.DARK_AQUA+ " /taketicket <#>" + ChatColor.WHITE + " - Assign yourself to a ticket");
-	    sender.sendMessage(getMessage("AdminCommandsMenu-taketicket"));
-//	    sender.sendMessage(ChatColor.DARK_AQUA + " /replyticket <#> <Reply>" + ChatColor.WHITE + " - Reply to a ticket");
-	    sender.sendMessage(getMessage("AdminCommandsMenu-replyticket"));
-//	    sender.sendMessage(ChatColor.DARK_AQUA + " /closeticket [r] <#>" + ChatColor.WHITE + " - Close or Reopen a ticket");
-	    sender.sendMessage(getMessage("AdminCommandsMenu-closeticket"));
-//	    sender.sendMessage(ChatColor.DARK_AQUA + " /delticket <#>" + ChatColor.WHITE + " - Delete a ticket");
+//		sender.sendMessage(ChatColor.DARK_AQUA + " /closeticket [r] <#>" + ChatColor.WHITE + " - Close or Reopen a ticket");
+		sender.sendMessage(getMessage("AdminCommandsMenu-closeticket"));
+//		sender.sendMessage(ChatColor.DARK_AQUA + " /delticket <#>" + ChatColor.WHITE + " - Delete a ticket");
 	    sender.sendMessage(getMessage("AdminCommandsMenu-delticket"));
-//	    sender.sendMessage(ChatColor.DARK_AQUA + " /purgetickets [-c/-a]" + ChatColor.WHITE + " - Purge expired, Closed or All tickets");
-	    sender.sendMessage(getMessage("AdminCommandsMenu-purgeticket"));
-//	    sender.sendMessage(ChatColor.DARK_AQUA + " /helptickets reload" + ChatColor.WHITE + " - Reload the config");
-	    sender.sendMessage(getMessage("AdminCommandsMenu-reload"));
-	  }
+//		sender.sendMessage(ChatColor.DARK_AQUA + " /purgetickets [-c/-a]" + ChatColor.WHITE + " - Purge expired, Closed or All tickets");
+		sender.sendMessage(getMessage("AdminCommandsMenu-purgeticket"));
+//		sender.sendMessage(ChatColor.DARK_AQUA + " /helptickets reload" + ChatColor.WHITE + " - Reload the config");
+		sender.sendMessage(getMessage("AdminCommandsMenu-reload"));
+      }	
 	}
-
 	public String getMessage(String phrase) {
 	  String prefix;
 	  String output;
@@ -347,33 +348,36 @@ public class SimpleHelpTickets extends JavaPlugin {
       return message;             
     }
 	  
-	  if (phrase == "AdminCommandsMenu-replyticket") {
+	  if (phrase == "GuardCommandsMenu-replyticket") {
       prefix =  ChatColor.DARK_AQUA + " /replyticket <#> <Reply>";
-      output = replaceColorMacros(getOutputConfig().getString("AdminCommandsMenu-replyticket"));
+      output = replaceColorMacros(getOutputConfig().getString("GuardCommandsMenu-replyticket"));
       message = prefix+output; 
       return message;             
     }
 	  
-	  if (phrase == "AdminCommandsMenu-taketicket") {
+	  if (phrase == "GuardCommandsMenu-taketicket") {
       prefix =  ChatColor.DARK_AQUA+ " /taketicket <#>";
-      output = replaceColorMacros(getOutputConfig().getString("AdminCommandsMenu-taketicket"));
+      output = replaceColorMacros(getOutputConfig().getString("GuardCommandsMenu-taketicket"));
       message = prefix+output; 
       return message;             
     }
 	  
-	  if (phrase == "AdminCommandsMenu-tickets") {
-      prefix =  ChatColor.DARK_AQUA + " /tickets [ac]";
-      output = replaceColorMacros(getOutputConfig().getString("AdminCommandsMenu-tickets"));
+	  if (phrase == "GuardCommandsMenu-tickets") {
+      prefix =  ChatColor.DARK_AQUA+ " /tickets [ac]";
+      output = replaceColorMacros(getOutputConfig().getString("GuardCommandsMenu-tickets"));
       message = prefix+output; 
       return message;             
     }
-	    
 	  if (phrase == "AdminCommandsMenu-Title") {
       output = replaceColorMacros(getOutputConfig().getString("AdminCommandsMenu-Title"));
       message = output; 
       return message;             
     }
-	  
+	  if (phrase == "GuardCommandsMenu-Title") {
+	  output = replaceColorMacros(getOutputConfig().getString("GuardCommandsMenu-Title"));
+	  message = output;
+	  return message;
+	}
 	  if (phrase == "UserCommandsMenu-delticket") {
       prefix =  ChatColor.GREEN + " /delticket <#>";
       output = replaceColorMacros(getOutputConfig().getString("UserCommandsMenu-delticket"));

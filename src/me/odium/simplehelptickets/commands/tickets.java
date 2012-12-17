@@ -31,7 +31,7 @@ public class tickets implements CommandExecutor {
     }
 
 
-    if (player == null || player.hasPermission("sht.admin")) {
+    if (player == null || player.hasPermission("sht.moderator")) {
 
       
       
@@ -228,13 +228,13 @@ public class tickets implements CommandExecutor {
 //          String TicketDesc = plugin.getStorageConfig().getString(TicketNumber+".description");
 //          String TicketPB = plugin.getStorageConfig().getString(TicketNumber+".placedby");
 //          String TicketREPLY = plugin.getStorageConfig().getString(TicketNumber+".reply");          
-//          if (player != null && !player.hasPermission("sht.admin") && TicketPB.contains(player.getDisplayName())) {            
+//          if (player != null && !player.hasPermission("sht.moderator") && TicketPB.contains(player.getDisplayName())) {            
 //            if (!TicketREPLY.equalsIgnoreCase("none")) {
 //              sender.sendMessage(ChatColor.GOLD + " (" + ChatColor.YELLOW + TicketNumber + ChatColor.GOLD + ") " + ChatColor.DARK_GREEN + TicketPB + ChatColor.YELLOW + ": " + TicketDesc);  
 //            } else {
 //              sender.sendMessage(ChatColor.GOLD + " (" + ChatColor.WHITE + TicketNumber + ChatColor.GOLD + ") " + ChatColor.DARK_GREEN + TicketPB + ChatColor.WHITE + ": " + TicketDesc);
 //            }
-//          } else if(player == null || player.hasPermission("sht.admin")) {            
+//          } else if(player == null || player.hasPermission("sht.moderator")) {            
 //            if (!TicketREPLY.equalsIgnoreCase("none")) {
 //              sender.sendMessage(ChatColor.GOLD + " (" + ChatColor.YELLOW + TicketNumber + ChatColor.GOLD + ") " + ChatColor.DARK_GREEN + TicketPB + ChatColor.YELLOW + ": " + TicketDesc);
 //            } else {
